@@ -31,7 +31,6 @@ for tick in tickers:
 
 
 ## Macroeconomic data (GDP, interest, etc)
-
 fred = Fred(api_key=os.getenv("FRED_API_KEY")) #API key from https://fred.stlouisfed.org/docs/api/api_key.html
 macro_indicators = ['GDP', 'DGS10', 'FEDFUNDS']
 FRED_by_year = {}
@@ -51,13 +50,21 @@ def addMacroData(row):
     for indicator in macro_indicators:
         row[indicator] = FRED_by_year[year].get(indicator, None)
     
+    
     return row
+
+
+
 
 #Add macroeconomic indicators to df with company info
 final_df = df.apply(addMacroData, axis=1)
 final_df.to_csv('all_data.csv', index=False)
 
+# Check the structure and data types
+# print(final_df.info())
 
+# Get summary statistics to understand distributions and outliers
+# print(final_df.describe())
 
-
-    
+# See how many missing values exist in each column
+# print(final_df.isnull().sum())
