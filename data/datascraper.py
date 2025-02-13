@@ -54,17 +54,32 @@ def addMacroData(row):
     return row
 
 
-
-
 #Add macroeconomic indicators to df with company info
 final_df = df.apply(addMacroData, axis=1)
 final_df.to_csv('all_data.csv', index=False)
 
-# Check the structure and data types
-# print(final_df.info())
+# Drops rows that are missing what we decide are key indicators (FOR NOW TO BE CHANGED LATER)
+final_df_clean = final_df.dropna(subset=['GDP', 'DGS10', 'FEDFUNDS', 'Capital Gains'])
+final_df_clean = final_df.drop_duplicates()
+
+# Ensure correct data types
+final_df_clean['Date'] = pd.to_datetime(final_df_clean['Date'])
+
+#List of columns we assume will be numeric
+numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'FEDFUNDS']
+
+for col in numeric_columns:
+    if col in final_df_clean.columns:
+        final_df_clean[col] = pd.to_numeric(final_df_clean[col], errors='coerce')
+        
+# Sort data by Ticker and Date (FOR NOW TO BE CHANGED LATER)
+final_df_clean = final_df_clean.sort_values(by=['Ticker', 'Date']).reset_index(drop=True)
+
+# Verify the data types
+print(final_df_clean.info())
 
 # Get summary statistics to understand distributions and outliers
-# print(final_df.describe())
+#print(final_df.describe())
 
 # See how many missing values exist in each column
-# print(final_df.isnull().sum())
+#print(final_df.isnull().sum())
