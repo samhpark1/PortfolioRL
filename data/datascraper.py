@@ -61,22 +61,46 @@ final_df = df.apply(addMacroData, axis=1)
 
 
 def add_capital_gains(df):
-    
-    #Calculated as the percentage change from the Open to Close price.
+    #Calculated as the percentage change from the Open to Close price
     df['Capital_Gains'] = (df['Close'] - df['Open']) / df['Open']
     return df
 
+def compute_daily_return(df):
+    #Calculated as the percentage change in Close price for each ticker
+    df = df.sort_values(by=['Ticker', 'Date'])
+    df['Return'] = df.groupby('Ticker')['Close'].pct_change()
+    return df
+
+def compute_moving_average(df, window, column='Close'):
+    #Computes a moving average for a given window over the specified column
+    #The result is stored in a new column  (MA{window})
+    ma_column = f"MA{window}"
+    df[ma_column] = df.groupby('Ticker')[column].transform(lambda x: x.rolling(window=window).mean())
+    return df
+
+
+def add_all_technical_indicators(df):
+  
+    df = add_capital_gains(df)
+    df = compute_daily_return(df)
+    df = compute_moving_average(df, 7)
+    df = compute_moving_average(df, 14)
+    df = compute_moving_average(df, 30)
+  
+    return df
+
+final_df = add_all_technical_indicators(final_df)
 final_df.to_csv('all_data.csv', index=False)
 
 # Drops rows that are missing what we decide are key indicators (FOR NOW TO BE CHANGED LATER)
-final_df_clean = final_df.dropna(subset=['GDP', 'DGS10', 'FEDFUNDS', 'Capital Gains'])
+final_df_clean = final_df.dropna(subset=['GDP', 'DGS10', 'FEDFUNDS'])
 final_df_clean = final_df.drop_duplicates()
 
 # Ensure correct data types
 final_df_clean['Date'] = pd.to_datetime(final_df_clean['Date'])
 
 #List of columns we assume will be numeric
-numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'FEDFUNDS']
+numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'FEDFUNDS', 'Capital_Gains', 'Return', 'MA7', 'MA14', 'MA30']
 for col in numeric_columns:
     if col in final_df_clean.columns:
         final_df_clean[col] = pd.to_numeric(final_df_clean[col], errors='coerce')
