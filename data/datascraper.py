@@ -58,6 +58,14 @@ def addMacroData(row):
 
 #Add macroeconomic indicators to df with company info
 final_df = df.apply(addMacroData, axis=1)
+
+
+def add_capital_gains(df):
+    
+    #Calculated as the percentage change from the Open to Close price.
+    df['Capital_Gains'] = (df['Close'] - df['Open']) / df['Open']
+    return df
+
 final_df.to_csv('all_data.csv', index=False)
 
 # Drops rows that are missing what we decide are key indicators (FOR NOW TO BE CHANGED LATER)
