@@ -29,6 +29,15 @@ end_date = f"{end_year}-12-31"
 all_data_exists = os.path.exists("all_data.csv")
 if all_data_exists:
     df = pd.read_csv("all_data.csv")
+start_year = 2018
+end_year = 2024
+
+start_date = f"{start_year}-01-01"
+end_date = f"{end_year}-12-31"
+
+all_data_exists = os.path.exists("all_data.csv")
+if all_data_exists:
+    df = pd.read_csv("all_data.csv")
 
 for tick in tickers:
     if all_data_exists and ((df['Ticker'] == tick) & (df['Date'] == start_date) & (df['Date'] == end_date)).any():
@@ -41,6 +50,8 @@ for tick in tickers:
     # Reset index to store the date as a column
         data.reset_index(inplace=True)
 
+        data['Ticker'] = tick
+        df = pd.concat([df, data])
         data['Ticker'] = tick
         df = pd.concat([df, data])
 
