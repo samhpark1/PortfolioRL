@@ -20,16 +20,29 @@ df = pd.DataFrame()
 
 time_period = '1y'
 time_interval = '1d'
+start_year = 2018
+end_year = 2024
+
+start_date = f"{start_year}-01-01"
+end_date = f"{end_year}-12-31"
+
+all_data_exists = os.path.exists("all_data.csv")
+if all_data_exists:
+    df = pd.read_csv("all_data.csv")
 
 for tick in tickers:
-    ticker = yf.Ticker(tick)
-    data = ticker.history(period=time_period, interval=time_interval)
+    if all_data_exists and ((df['Ticker'] == tick) & (df['Date'] == start_date) & (df['Date'] == end_date)).any():
+        continue
+    else:
+        ticker = yf.Ticker(tick)
+        data = ticker.history(start=start_date, end=end_date, interval=time_interval)
+
 
     # Reset index to store the date as a column
-    data.reset_index(inplace=True)
+        data.reset_index(inplace=True)
 
-    data['Ticker'] = tick
-    df = pd.concat([df, data])
+        data['Ticker'] = tick
+        df = pd.concat([df, data])
 
 
 ## Macroeconomic data (GDP, interest, etc)
@@ -135,8 +148,3 @@ plt.show()
 #HERE - Do Correlation Analysis
 
 #HERE - Feature Selection
-
-
-
-
-
