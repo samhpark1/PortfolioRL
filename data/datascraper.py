@@ -18,7 +18,6 @@ tickers = ticker_df['Ticker'].to_list()
 #get data from list of tickers
 df = pd.DataFrame()
 
-time_period = '1y'
 time_interval = '1d'
 start_year = 2018
 end_year = 2024
@@ -29,11 +28,7 @@ end_date = f"{end_year}-12-31"
 all_data_exists = os.path.exists("all_data.csv")
 if all_data_exists:
     df = pd.read_csv("all_data.csv")
-start_year = 2018
-end_year = 2024
 
-start_date = f"{start_year}-01-01"
-end_date = f"{end_year}-12-31"
 
 all_data_exists = os.path.exists("all_data.csv")
 if all_data_exists:
