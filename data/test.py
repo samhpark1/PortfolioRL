@@ -16,11 +16,6 @@ corr_matrix = corr_matrix.dropna(axis=0, how='all').dropna(axis=1, how='all')
 
 print(corr_matrix)
 
-sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", cbar=True, 
-            linewidths=0.5, linecolor='black')
-plt.xticks(rotation=45, ha='right')
-plt.yticks(rotation=0)
-
 plt.figure(figsize=(12, 10))
 ax = sns.heatmap(corr_matrix, annot=True, fmt=".2f", cmap="coolwarm", 
                  linewidths=1, linecolor='black')
