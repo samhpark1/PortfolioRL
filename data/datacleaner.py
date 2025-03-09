@@ -21,13 +21,13 @@ def compute_moving_average(df, window, column='Close'):
 
 
 def add_all_technical_indicators(df):
-  
+
     df = add_capital_gains(df)
     df = compute_daily_return(df)
     df = compute_moving_average(df, 7)
     df = compute_moving_average(df, 14)
     df = compute_moving_average(df, 30)
-  
+
     return df
 
 df = pd.read_csv("scraped_data.csv", header=0)
@@ -48,7 +48,7 @@ numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'Ca
 for col in numeric_columns:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
-        
+
 # Sort data by Ticker and Date (FOR NOW TO BE CHANGED LATER)
 final_df_clean = df.sort_values(by=['Ticker', 'Date']).reset_index(drop=True)
 
