@@ -23,10 +23,16 @@ def compute_moving_average(df, window, column='Close'):
 def add_all_technical_indicators(df):
 
     df = add_capital_gains(df)
+    print("added captical gains")
     df = compute_daily_return(df)
+    print("added daily returns")
     df = compute_moving_average(df, 7)
+    print("added 7 day MA")
     df = compute_moving_average(df, 14)
+    print("added 14 day MA")
     df = compute_moving_average(df, 30)
+    print("added 30 day MA")
+
 
     return df
 
@@ -44,7 +50,7 @@ df = df.drop_duplicates()
 df['Date'] = pd.to_datetime(df['Date'])
 
 #List of columns we assume will be numeric
-numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'Capital_Gains', 'Return', 'MA7', 'MA14', 'MA30', 'FF1', 'FF2', 'FF3', 'FF4', 'FF5', 'FF6', 'FF7', 'FF8', 'FF9', 'FF10', 'FF11', 'FF12', 'FF13', 'FFavg',]
+numeric_columns = ['Open', 'High', 'Low', 'Close', 'Volume', 'GDP', 'DGS10', 'Capital_Gains', 'Return', 'MA7', 'MA14', 'MA30', 'FF1', 'FF2', 'FF3', 'FF4', 'FF5', 'FF6', 'FF7', 'FF8', 'FF9', 'FF10', 'FF11', 'FF12', 'FF13', 'FFavg']
 for col in numeric_columns:
     if col in df.columns:
         df[col] = pd.to_numeric(df[col], errors='coerce')
