@@ -4,7 +4,7 @@ import numpy as np
 import seaborn as sns
 
 # Load the data from the CSV file
-df = pd.read_csv('all_data.csv')
+df = pd.read_csv('cleaned_data.csv')
 
 df['Date'] = pd.to_datetime(df['Date'])
 
