@@ -1,8 +1,12 @@
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+
 function App() {
 
   return (
     <div>
-      <h1 className="text-blue-400">test</h1>
+      <Navbar />
+      <Hero />
     </div>
   )
 }
