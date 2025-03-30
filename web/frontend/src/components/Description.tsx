@@ -1,9 +1,12 @@
+import Github from "./Github"
+
+
 function Description() {
 
     return (
-      <div className="h-screen bg-black flex flex-col p-10">
-        <h1 className="text-4xl text-gray-200 font-bold py-10">Behind the Scenes</h1>
+      <div className="h-screen bg-black flex p-10">
         <section className="flex flex-col gap-y-10 max-w-1/2">
+          <h1 className="text-4xl text-gray-200 font-bold pt-10">Behind the Scenes</h1>
           <section>
             <h2 className="text-xl text-gray-100">Our Dataset</h2>
             <ul className="text-gray-300 marker:text-gray-300 list-disc pl-5">
@@ -24,6 +27,7 @@ function Description() {
             </ul>
           </section>
         </section>
+        <Github />
       </div>
     )
   }
