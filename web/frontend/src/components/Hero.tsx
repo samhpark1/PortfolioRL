@@ -27,8 +27,8 @@ function Hero() {
 
     return (
       <div className="flex flex-col justify-between h-screen bg-linear-to-br from-black to-purple-950 z-0 px-10 pt-20 pb-10">
-        <section className="flex flex-col">
-          <h1 className="text-7xl font-bold text-gray-200">PortfolioRL</h1>
+        <section className="intro flex flex-col">
+          <h1 className="text-8xl font-bold text-gray-200">PortfolioRL</h1>
           <p className="text-xl text-gray-300 max-w-sm">A Deep Reinforcement Learning Project for Portfolio Optimization</p>
         </section>
         <section className='flex justify-center'>
