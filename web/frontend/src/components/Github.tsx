@@ -64,7 +64,7 @@ class ActorCritic(nn.Module):
 
   return (
         <div 
-            className="m-10 p-5 hover:shadow-green-400 hover:shadow-lg hover:border-green-400 hover:border-2 rounded-xl min-w-1/2 max-w-1/2 text-[0.65rem] bg-gray-900 text-green-400 font-mono"
+            className="m-10 mt-15 p-5 hover:shadow-green-400 hover:shadow-lg hover:border-green-400 hover:border-2 rounded-xl min-w-1/2 max-w-1/2 text-[0.65rem] bg-gray-900 text-green-400 font-mono"
             onClick={linkHandler}
         >
             <pre
@@ -75,7 +75,7 @@ class ActorCritic(nn.Module):
                 lineHeight: "1.5",
                 }}
             />
-            <h1 className="flex justify-center pt-10 text-xl">Click to See our Github!</h1>
+            <p className="font-mono text-red-700 underline decoration-wavy decoration-red-700">Click to see our Github!</p>
         </div>
     
   );
