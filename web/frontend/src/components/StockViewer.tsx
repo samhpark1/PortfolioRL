@@ -28,8 +28,7 @@ function StockViewer({ stocks }: ComponentProps) {
     }, []);
 
     return (
-        <div className='bg-white border-2 border-violet-200 flex flex-col justify-center items-center h-1/2 w-1/2 p-5 gap-y-5 rounded-2xl'>
-            <h1 className="font-semibold">Your Portfolio's Historical Performance</h1>
+        <div className='bg-white h-1/2 w-1/2 p-5'>
             <div ref={chartContainerRef} style={{width: 600, height: 400}}/>
         </div>
         

@@ -16,8 +16,12 @@ function StockChooser(){
         console.log(price);
     }
 
+    const submitHandler = () => {
+        
+    }
+
     return (
-        <div>
+        <div className='flex flex-col gap-y-5 bg-white w-1/4 h-1/3'>
             <h1>Stock Ticker</h1>
             <input
                 type="text"
@@ -33,7 +37,11 @@ function StockChooser(){
                 onChange={handlePriceInputChange}
                 placeholder="$0.00"
             />
-            <button>Add</button>
+            <button
+                onClick={submitHandler}
+            >
+                Add
+            </button>
         </div>
     )
 
